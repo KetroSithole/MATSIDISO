@@ -1,28 +1,35 @@
-var slidePosition = 1;
-SlideShow(slidePosition);
-
-// forward/Back controls
-function plusSlides(n) {
-    SlideShow(slidePosition += n);
-}
-
-//  images controls
-function currentSlide(n) {
-    SlideShow(slidePosition = n);
-}
-
-function SlideShow(n) {
-    var i;
-    var slides = document.getElementsByClassName("Containers");
-    var circles = document.getElementsByClassName("dots");
-    if (n > slides.length) { slidePosition = 1 }
-    if (n < 1) { slidePosition = slides.length }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+const carouselContainer = document.querySelector(".carouselContainer");
+const slides = document.querySelectorAll('.slides');
+const next = document.querySelector('#next');
+const prev = document.querySelector('#prev');
+let counter = 1;
+const size = slides[0].clientWidth;
+carouselContainer.style.transform = 'translateX(' + (-size * counter) + 'px';
+next.addEventListener('click', () => {
+    if (counter >= slides.length) return;
+    carouselContainer.style.transition = 'transform 0.4s ease-in-out';
+    counter++;
+    carouselContainer.style.transform = 'translateX(' + (-size * counter) + 'px';
+});
+prev.addEventListener('click', () => {
+    if (counter <= 0) return;
+    carouselContainer.style.transition = 'transform 0.4s ease-in-out';
+    counter--;
+    carouselContainer.style.transform = 'translateX(' + (-size * counter) + 'px';
+});
+carouselContainer.addEventListener('transitionend', () => {
+    console.log(slides[counter]);
+    if (slides[counter].id === 'lastslide') {
+        carouselContainer.style.transition = 'none';
+        counter = slides.length - 2;
+        carouselContainer.style.transform = 'translateX(' + (-size * counter) + 'px';
     }
-    for (i = 0; i < circles.length; i++) {
-        circles[i].className = circles[i].className.replace(" enable", "");
+});
+carouselContainer.addEventListener('transitionend', () => {
+    console.log(slides[counter]);
+    if (slides[counter].id === 'firstslide') {
+        carouselContainer.style.transition = 'none';
+        counter = slides.length - counter;
+        carouselContainer.style.transform = 'translateX(' + (-size * counter) + 'px';
     }
-    slides[slidePosition - 1].style.display = "block";
-    circles[slidePosition - 1].className += " enable";
-} 
+});  
