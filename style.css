@@ -806,22 +806,27 @@ body {
 
 .navbar-brand {
     color: rgb(12, 12, 12);
+    text-transform: uppercase;
 }
 
 .navbar-brand:hover {
     color: rgb(16, 16, 16);
+    text-transform: uppercase;
 }
 
 .nav-link {
     color: rgb(11, 11, 11);
+    text-transform: uppercase;
 }
 
 .nav-link:hover {
     color: rgb(12, 12, 12);
+    text-transform: uppercase;
 }
 
 .navbar-toggler {
     outline: none !important;
+    text-transform: uppercase;
 }
 
 
@@ -1011,4 +1016,6 @@ body {
 
 .info{
     background: fixed;
+
+
 }
